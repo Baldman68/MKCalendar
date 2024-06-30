@@ -23,7 +23,7 @@ public struct MKCalendar: View {
     @State public var calendarPageView: Binding<CalendarPageType> = .constant(CalendarPageType.thisMonth)
     @State public var selectedPage = CalendarPageType.thisMonth
     
-    let columns = [
+    public let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -186,7 +186,7 @@ public struct MKCalendar: View {
         
     }
     
-    func getMonthName(monthNum: Int) -> String {
+    public func getMonthName(monthNum: Int) -> String {
         var rtnVal = "January"
         switch monthNum {
         case 1:
@@ -220,7 +220,7 @@ public struct MKCalendar: View {
         return rtnVal
     }
     
-    func numberOfDaysInMonth(year: Int, month: Int) -> Int {
+    public func numberOfDaysInMonth(year: Int, month: Int) -> Int {
         let dateComponents = DateComponents(year: year, month: month)
         let calendar = Calendar.current
         let date = calendar.date(from: dateComponents)!
@@ -230,7 +230,7 @@ public struct MKCalendar: View {
         return numDays
     }
     
-    func getDaysOfMonth() {
+    public func getDaysOfMonth() {
         // Number of days in this month
         let numOfDays = numberOfDaysInMonth(year: visibleYear, month: visibleMonth)
         
@@ -288,7 +288,7 @@ public struct MKCalendar: View {
     
 
     
-    func setSelectedDateToNewMonth() {
+    public func setSelectedDateToNewMonth() {
         let dateComponents = DateComponents(year: visibleYear, month: visibleMonth, day: 1)
         let calendar = Calendar.current
         var newSelectedDate = calendar.date(from: dateComponents)!
@@ -300,27 +300,27 @@ public struct MKCalendar: View {
         selectedDate = newSelectedDate
     }
     
-    func getDateFromComponents(year: Int, month: Int, day: Int) -> Date {
+    public func getDateFromComponents(year: Int, month: Int, day: Int) -> Date {
         let dateComponents = DateComponents(year: year, month: month, day: day)
         let calendar = Calendar.current
         return calendar.date(from: dateComponents)!
     }
     
-    func getDayFromDate(date: Date) -> Int {
+    public func getDayFromDate(date: Date) -> Int {
         return Calendar.current.dateComponents([.day], from: date).day!
     }
     
-    func isDateInCurrentMonth(date: Date) -> Bool {
+    public func isDateInCurrentMonth(date: Date) -> Bool {
         let theMonth = Calendar.current.dateComponents([.month], from: date).month!
         
         return theMonth == visibleMonth
     }
     
-    func areDatesEqual(date1: Date, date2: Date) -> Bool {
+    public func areDatesEqual(date1: Date, date2: Date) -> Bool {
         return Calendar.current.isDate(date1, equalTo: date2, toGranularity: .day)
     }
     
-    func goToLastMonth(){
+    public func goToLastMonth(){
         if visibleMonth == 1 {
             visibleMonth = 12
             visibleYear = visibleYear - 1
@@ -333,7 +333,7 @@ public struct MKCalendar: View {
         setSelectedDateToNewMonth()
     }
     
-    func goToNextMonth(){
+    public func goToNextMonth(){
         if visibleMonth == 12 {
             visibleMonth = 1
             visibleYear = visibleYear + 1
