@@ -11,19 +11,18 @@
 import SwiftUI
 
 @available(iOS 17.0, *)
-struct MKCalendar: View {
+public struct MKCalendar: View {
     @Binding public var visibleMonth: Int
     @Binding public var visibleYear: Int
     @Binding public var selectedDate: Date
     @Binding public var datesWithEvents: [Date]?
-    @State public var rowsNeeded = 0
     @State public var dayOfWeek = 0
     @State public var datesOfMonth: [Date] = .init()
     @State public var isShowingPicker: Bool = false
     @State public var calendarPageView: Binding<CalendarPageType> = .constant(CalendarPageType.thisMonth)
     @State public var selectedPage = CalendarPageType.thisMonth
     
-    let columns = [
+    public let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -32,8 +31,16 @@ struct MKCalendar: View {
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
+    
+    public init(visibleMonth: Binding<Int>, visibleYear: Binding<Int>, selectedDate: Binding<Date>, datesWithEvents: Binding<[Date]?>) {
+        self._visibleMonth = visibleMonth
+        self._visibleYear = visibleYear
+        self._selectedDate = selectedDate
+        self._datesWithEvents = datesWithEvents
+        
+    }
 
-    var body: some View {
+    public var body: some View {
        
             VStack {
                 if isShowingPicker {
@@ -186,7 +193,7 @@ struct MKCalendar: View {
         
     }
     
-    func getMonthName(monthNum: Int) -> String {
+    public func getMonthName(monthNum: Int) -> String {
         var rtnVal = "January"
         switch monthNum {
         case 1:
@@ -220,7 +227,7 @@ struct MKCalendar: View {
         return rtnVal
     }
     
-    func numberOfDaysInMonth(year: Int, month: Int) -> Int {
+    public func numberOfDaysInMonth(year: Int, month: Int) -> Int {
         let dateComponents = DateComponents(year: year, month: month)
         let calendar = Calendar.current
         let date = calendar.date(from: dateComponents)!
@@ -230,7 +237,7 @@ struct MKCalendar: View {
         return numDays
     }
     
-    func getDaysOfMonth() {
+    public func getDaysOfMonth() {
         // Number of days in this month
         let numOfDays = numberOfDaysInMonth(year: visibleYear, month: visibleMonth)
         
@@ -288,7 +295,7 @@ struct MKCalendar: View {
     
 
     
-    func setSelectedDateToNewMonth() {
+    public func setSelectedDateToNewMonth() {
         let dateComponents = DateComponents(year: visibleYear, month: visibleMonth, day: 1)
         let calendar = Calendar.current
         var newSelectedDate = calendar.date(from: dateComponents)!
@@ -300,27 +307,27 @@ struct MKCalendar: View {
         selectedDate = newSelectedDate
     }
     
-    func getDateFromComponents(year: Int, month: Int, day: Int) -> Date {
+    public func getDateFromComponents(year: Int, month: Int, day: Int) -> Date {
         let dateComponents = DateComponents(year: year, month: month, day: day)
         let calendar = Calendar.current
         return calendar.date(from: dateComponents)!
     }
     
-    func getDayFromDate(date: Date) -> Int {
+    public func getDayFromDate(date: Date) -> Int {
         return Calendar.current.dateComponents([.day], from: date).day!
     }
     
-    func isDateInCurrentMonth(date: Date) -> Bool {
+    public func isDateInCurrentMonth(date: Date) -> Bool {
         let theMonth = Calendar.current.dateComponents([.month], from: date).month!
         
         return theMonth == visibleMonth
     }
     
-    func areDatesEqual(date1: Date, date2: Date) -> Bool {
+    public func areDatesEqual(date1: Date, date2: Date) -> Bool {
         return Calendar.current.isDate(date1, equalTo: date2, toGranularity: .day)
     }
     
-    func goToLastMonth(){
+    public func goToLastMonth(){
         if visibleMonth == 1 {
             visibleMonth = 12
             visibleYear = visibleYear - 1
@@ -333,7 +340,7 @@ struct MKCalendar: View {
         setSelectedDateToNewMonth()
     }
     
-    func goToNextMonth(){
+    public func goToNextMonth(){
         if visibleMonth == 12 {
             visibleMonth = 1
             visibleYear = visibleYear + 1
@@ -346,23 +353,19 @@ struct MKCalendar: View {
     }
 }
 
-struct MonthDays: Hashable {
-    var dayNumber: Int
-    var dayOfWeekNumber: Int
-}
+//public struct MonthDays: Hashable {
+//    var dayNumber: Int
+//    var dayOfWeekNumber: Int
+//}
+
 
 @available(iOS 17.0, *)
-#Preview {
-    MKCalendar(visibleMonth: .constant(6), visibleYear: .constant(2024), selectedDate: .constant(Date()), datesWithEvents: .constant([Date()]))
-}
-
-@available(iOS 17.0, *)
-struct MonthAndYearPicker: View {
+public struct MonthAndYearPicker: View {
     @Binding var year: Int
     @Binding var month: Int
     @Binding var isShowingPicker: Bool
     
-    var body: some View {
+    public var body: some View {
         VStack {
             Spacer()
             HStack {
@@ -433,7 +436,7 @@ public enum CalendarPageType: Int, Equatable {
 
 @available(iOS 17.0, *)
 extension MKCalendar {
-    private func pageSelection() -> Binding<CalendarPageType> {
+    public func pageSelection() -> Binding<CalendarPageType> {
         Binding { // this is the get block
             self.selectedPage
         } set: { tappedTab in
