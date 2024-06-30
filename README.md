@@ -14,3 +14,11 @@ Quickly choose a different month and or year to display.
 
 Implement like this.  You can watch for changes on selectedDate, visibleMonth or visibleYear
 <img width="1092" alt="image" src="https://github.com/Baldman68/MKCalendar/assets/16213033/f160a6d2-f556-4c5b-aa1c-6fa5c879c9d4">
+
+
+Installation:
+
+MKCalendar is available using the Swift Package Manager:
+
+Using Xcode, go to File -> Swift Packages -> Add Package Dependency and enter "https://github.com/Baldman68/MKCalendar.git"
+
