@@ -11,7 +11,7 @@
 import SwiftUI
 
 @available(iOS 17.0, *)
-struct MKCalendar: View {
+public struct MKCalendar: View {
     @Binding public var visibleMonth: Int
     @Binding public var visibleYear: Int
     @Binding public var selectedDate: Date
@@ -33,7 +33,7 @@ struct MKCalendar: View {
         GridItem(.flexible())
     ]
 
-    var body: some View {
+    public var body: some View {
        
             VStack {
                 if isShowingPicker {
@@ -346,23 +346,19 @@ struct MKCalendar: View {
     }
 }
 
-struct MonthDays: Hashable {
-    var dayNumber: Int
-    var dayOfWeekNumber: Int
-}
+//public struct MonthDays: Hashable {
+//    var dayNumber: Int
+//    var dayOfWeekNumber: Int
+//}
+
 
 @available(iOS 17.0, *)
-#Preview {
-    MKCalendar(visibleMonth: .constant(6), visibleYear: .constant(2024), selectedDate: .constant(Date()), datesWithEvents: .constant([Date()]))
-}
-
-@available(iOS 17.0, *)
-struct MonthAndYearPicker: View {
+public struct MonthAndYearPicker: View {
     @Binding var year: Int
     @Binding var month: Int
     @Binding var isShowingPicker: Bool
     
-    var body: some View {
+    public var body: some View {
         VStack {
             Spacer()
             HStack {
@@ -433,7 +429,7 @@ public enum CalendarPageType: Int, Equatable {
 
 @available(iOS 17.0, *)
 extension MKCalendar {
-    private func pageSelection() -> Binding<CalendarPageType> {
+    public func pageSelection() -> Binding<CalendarPageType> {
         Binding { // this is the get block
             self.selectedPage
         } set: { tappedTab in
