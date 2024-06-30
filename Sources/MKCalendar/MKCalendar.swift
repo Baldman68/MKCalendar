@@ -16,7 +16,6 @@ public struct MKCalendar: View {
     @Binding public var visibleYear: Int
     @Binding public var selectedDate: Date
     @Binding public var datesWithEvents: [Date]?
-    @State public var rowsNeeded = 0
     @State public var dayOfWeek = 0
     @State public var datesOfMonth: [Date] = .init()
     @State public var isShowingPicker: Bool = false
@@ -33,17 +32,12 @@ public struct MKCalendar: View {
         GridItem(.flexible())
     ]
     
-    public init(visibleMonth: Binding<Int>, visibleYear: Binding<Int>, selectedDate: Binding<Date>, datesWithEvents: Binding<[Date]?>, rowsNeeded: Int = 0, dayOfWeek: Int = 0, datesOfMonth: [Date], isShowingPicker: Bool, calendarPageView: Binding<CalendarPageType>, selectedPage: CalendarPageType = CalendarPageType.thisMonth) {
+    public init(visibleMonth: Binding<Int>, visibleYear: Binding<Int>, selectedDate: Binding<Date>, datesWithEvents: Binding<[Date]?>) {
         self._visibleMonth = visibleMonth
         self._visibleYear = visibleYear
         self._selectedDate = selectedDate
         self._datesWithEvents = datesWithEvents
-        self.rowsNeeded = rowsNeeded
-        self.dayOfWeek = dayOfWeek
-        self.datesOfMonth = datesOfMonth
-        self.isShowingPicker = isShowingPicker
-        self.calendarPageView = calendarPageView
-        self.selectedPage = selectedPage
+        
     }
 
     public var body: some View {
