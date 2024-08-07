@@ -161,7 +161,7 @@ public struct MKCalendar: View {
                 }
                 
             }
-            .frame(height: 380)
+            .frame(height: 300)
             .onAppear {
                 getDaysOfMonth()
             }
