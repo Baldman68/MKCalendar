@@ -82,7 +82,7 @@ public struct MKCalendar: View {
                             }
                             
                             
-                            VStack {
+                            VStack(spacing: 1) {
                                 LazyVGrid(columns: columns, spacing: 20) {
                                     Text("SUN")
                                     Text("MON")
@@ -94,6 +94,7 @@ public struct MKCalendar: View {
                                 }
                                 .foregroundColor(.secondary.opacity(0.4))
                                 .font(.footnote)
+                                
                                                                 
                                 TabView(selection: pageSelection()) {
                                     Image(systemName: "arrowshape.left.fill")
@@ -116,6 +117,7 @@ public struct MKCalendar: View {
                                                             }
                                                         }
                                                 }
+                                                .padding(.bottom, 0)
                                                 
                                                 Spacer()
                                                 
@@ -124,17 +126,17 @@ public struct MKCalendar: View {
                                                         .resizable()
                                                         .foregroundColor(.secondary)
                                                         .frame(width: 4, height: 4)
-                                                        .padding(.top, -2)
+                                                        .padding(.top, -4)
                                                 }
                                                 else {
                                                     Image(systemName: "circle.fill")
                                                         .resizable()
                                                         .foregroundColor(.clear)
                                                         .frame(width: 4, height: 4)
-                                                        .padding(.top, -2)
+                                                        .padding(.top, -4)
                                                 }
                                             }
-                                            .frame(maxHeight: 34)
+                                            .frame(maxHeight: 26)
                                             .fixedSize(horizontal: true, vertical: true)
                                         }
                                     }
@@ -145,6 +147,7 @@ public struct MKCalendar: View {
                                         .tag(CalendarPageType.nextMonth)
                                 }
                                 .tabViewStyle(.page(indexDisplayMode: .never))
+                                .padding(.top, -80)
                             }
                             
                                 
@@ -293,8 +296,6 @@ public struct MKCalendar: View {
         }
     }
     
-
-    
     public func setSelectedDateToNewMonth() {
         let dateComponents = DateComponents(year: visibleYear, month: visibleMonth, day: 1)
         let calendar = Calendar.current
@@ -353,11 +354,10 @@ public struct MKCalendar: View {
     }
 }
 
-//public struct MonthDays: Hashable {
-//    var dayNumber: Int
-//    var dayOfWeekNumber: Int
-//}
-
+@available(iOS 17.0, *)
+#Preview {
+    MKCalendar(visibleMonth: .constant(8), visibleYear: .constant(2024), selectedDate: .constant(Date()), datesWithEvents: .constant([Date()]))
+}
 
 @available(iOS 17.0, *)
 public struct MonthAndYearPicker: View {
@@ -444,3 +444,5 @@ extension MKCalendar {
         }
     }
 }
+
+
