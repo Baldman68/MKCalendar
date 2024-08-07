@@ -48,7 +48,7 @@ public struct MKCalendar: View {
                 }
                 else {
                     
-                        VStack {
+                    VStack {
                             HStack {
                                 Button(action: {
                                     isShowingPicker.toggle()
@@ -80,7 +80,6 @@ public struct MKCalendar: View {
                                         .imageScale(.large)
                                 })
                             }
-                            
                             
                             VStack(spacing: 1) {
                                 LazyVGrid(columns: columns, spacing: 20) {
@@ -137,31 +136,32 @@ public struct MKCalendar: View {
                                                 }
                                             }
                                             .frame(maxHeight: 26)
-                                            .fixedSize(horizontal: true, vertical: true)
+                                            .fixedSize(horizontal: true, vertical: false)
                                         }
                                     }
-                                        .tag(CalendarPageType.thisMonth)
+                                    .tag(CalendarPageType.thisMonth)
+                                   
+                                    
                                     
                                     Image(systemName: "arrowshape.right.fill")
                                         .imageScale(.large)
                                         .tag(CalendarPageType.nextMonth)
                                 }
                                 .tabViewStyle(.page(indexDisplayMode: .never))
-                                .padding(.top, -80)
-                            }
-                            
+                                .padding(.top, -30)
                                 
+                                .frame(height:260)
+                            }
+                            .padding(.bottom, -10)
+                           
                             
                         }
-                       
                         
-                       
-                        
-                    
                 }
                 
             }
-            .frame(height: 300)
+            
+            .frame(height: 350)
             .onAppear {
                 getDaysOfMonth()
             }
