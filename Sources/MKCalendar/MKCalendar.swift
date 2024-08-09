@@ -81,6 +81,7 @@ public struct MKCalendar: View {
                                 })
                             }
                             
+                            
                             VStack(spacing: 1) {
                                 LazyVGrid(columns: columns, spacing: 20) {
                                     Text("SUN")
@@ -150,18 +151,18 @@ public struct MKCalendar: View {
                                 .tabViewStyle(.page(indexDisplayMode: .never))
                                 .padding(.top, -30)
                                 
-                                .frame(height:260)
+                                
                             }
                             .padding(.bottom, -10)
-                           
+                            
                             
                         }
                         
                 }
                 
             }
-            
             .frame(height: 350)
+           
             .onAppear {
                 getDaysOfMonth()
             }
@@ -356,7 +357,7 @@ public struct MKCalendar: View {
 
 @available(iOS 17.0, *)
 #Preview {
-    MKCalendar(visibleMonth: .constant(8), visibleYear: .constant(2024), selectedDate: .constant(Date()), datesWithEvents: .constant([Date()]))
+    MKCalendar(visibleMonth: .constant(3), visibleYear: .constant(2025), selectedDate: .constant(Date()), datesWithEvents: .constant([Date()]))
 }
 
 @available(iOS 17.0, *)
