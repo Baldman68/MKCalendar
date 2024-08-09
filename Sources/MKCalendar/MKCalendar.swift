@@ -1,11 +1,8 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
-
 //
-//  CalendarViewControl.swift
+//  MKCalendar.swift
 //  MobileGoRecruit
 //
-//  Created by Michael Kacos on 6/26/24.
+//  Created by Michael Kacos on 8/9/24.
 //
 
 import SwiftUI
@@ -94,7 +91,7 @@ public struct MKCalendar: View {
                                 }
                                 .foregroundColor(.secondary.opacity(0.4))
                                 .font(.footnote)
-                                
+                                .padding(.bottom)
                                                                 
                                 TabView(selection: pageSelection()) {
                                     Image(systemName: "arrowshape.left.fill")
@@ -141,8 +138,6 @@ public struct MKCalendar: View {
                                         }
                                     }
                                     .tag(CalendarPageType.thisMonth)
-                                   
-                                    
                                     
                                     Image(systemName: "arrowshape.right.fill")
                                         .imageScale(.large)
@@ -161,7 +156,7 @@ public struct MKCalendar: View {
                 }
                 
             }
-            .frame(height: 350)
+
            
             .onAppear {
                 getDaysOfMonth()
@@ -445,5 +440,6 @@ extension MKCalendar {
         }
     }
 }
+
 
 
