@@ -1,11 +1,8 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
-
 //
-//  CalendarViewControl.swift
+//  MKCalendar.swift
 //  MobileGoRecruit
 //
-//  Created by Michael Kacos on 6/26/24.
+//  Created by Michael Kacos on 8/9/24.
 //
 
 import SwiftUI
@@ -48,7 +45,7 @@ public struct MKCalendar: View {
                 }
                 else {
                     
-                        VStack {
+                    VStack {
                             HStack {
                                 Button(action: {
                                     isShowingPicker.toggle()
@@ -82,7 +79,7 @@ public struct MKCalendar: View {
                             }
                             
                             
-                            VStack {
+                            VStack(spacing: 1) {
                                 LazyVGrid(columns: columns, spacing: 20) {
                                     Text("SUN")
                                     Text("MON")
@@ -94,6 +91,7 @@ public struct MKCalendar: View {
                                 }
                                 .foregroundColor(.secondary.opacity(0.4))
                                 .font(.footnote)
+                                .padding(.bottom)
                                                                 
                                 TabView(selection: pageSelection()) {
                                     Image(systemName: "arrowshape.left.fill")
@@ -116,6 +114,7 @@ public struct MKCalendar: View {
                                                             }
                                                         }
                                                 }
+                                                .padding(.bottom, 0)
                                                 
                                                 Spacer()
                                                 
@@ -124,41 +123,41 @@ public struct MKCalendar: View {
                                                         .resizable()
                                                         .foregroundColor(.secondary)
                                                         .frame(width: 4, height: 4)
-                                                        .padding(.top, -2)
+                                                        .padding(.top, -4)
                                                 }
                                                 else {
                                                     Image(systemName: "circle.fill")
                                                         .resizable()
                                                         .foregroundColor(.clear)
                                                         .frame(width: 4, height: 4)
-                                                        .padding(.top, -2)
+                                                        .padding(.top, -4)
                                                 }
                                             }
-                                            .frame(maxHeight: 34)
-                                            .fixedSize(horizontal: true, vertical: true)
+                                            .frame(maxHeight: 26)
+                                            .fixedSize(horizontal: true, vertical: false)
                                         }
                                     }
-                                        .tag(CalendarPageType.thisMonth)
+                                    .tag(CalendarPageType.thisMonth)
                                     
                                     Image(systemName: "arrowshape.right.fill")
                                         .imageScale(.large)
                                         .tag(CalendarPageType.nextMonth)
                                 }
                                 .tabViewStyle(.page(indexDisplayMode: .never))
-                            }
-                            
+                                .padding(.top, -30)
                                 
+                                
+                            }
+                            .padding(.bottom, -10)
+                            
                             
                         }
-                       
                         
-                       
-                        
-                    
                 }
                 
             }
-            .frame(height: 380)
+
+           
             .onAppear {
                 getDaysOfMonth()
             }
@@ -293,8 +292,6 @@ public struct MKCalendar: View {
         }
     }
     
-
-    
     public func setSelectedDateToNewMonth() {
         let dateComponents = DateComponents(year: visibleYear, month: visibleMonth, day: 1)
         let calendar = Calendar.current
@@ -353,11 +350,10 @@ public struct MKCalendar: View {
     }
 }
 
-//public struct MonthDays: Hashable {
-//    var dayNumber: Int
-//    var dayOfWeekNumber: Int
-//}
-
+@available(iOS 17.0, *)
+#Preview {
+    MKCalendar(visibleMonth: .constant(3), visibleYear: .constant(2025), selectedDate: .constant(Date()), datesWithEvents: .constant([Date()]))
+}
 
 @available(iOS 17.0, *)
 public struct MonthAndYearPicker: View {
@@ -444,3 +440,6 @@ extension MKCalendar {
         }
     }
 }
+
+
+
