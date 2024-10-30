@@ -118,7 +118,9 @@ public struct MKCalendar: View {
                                                 
                                                 Spacer()
                                                 
-                                                if datesWithEvents != nil && (datesWithEvents?.filter { areDatesEqual(date1: $0, date2: day) }.count)! > 0 {
+                                                /*if datesWithEvents != nil && (datesWithEvents?.filter { areDatesEqual(date1: $0, date2: day)*/
+                                                if datesWithEvents != nil && (datesWithEvents?.filter { Calendar.current.isDate($0, equalTo: day, toGranularity: .day)
+                                            }.count)! > 0 {
                                                     Image(systemName: "circle.fill")
                                                         .resizable()
                                                         .foregroundColor(.secondary)
@@ -352,7 +354,7 @@ public struct MKCalendar: View {
 
 @available(iOS 17.0, *)
 #Preview {
-    MKCalendar(visibleMonth: .constant(3), visibleYear: .constant(2025), selectedDate: .constant(Date()), datesWithEvents: .constant([Date()]))
+    MKCalendar(visibleMonth: .constant(1), visibleYear: .constant(2025), selectedDate: .constant(Date()), datesWithEvents: .constant([Date()]))
 }
 
 @available(iOS 17.0, *)
