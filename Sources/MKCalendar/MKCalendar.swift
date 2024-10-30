@@ -321,10 +321,9 @@ public struct MKCalendar: View {
     }
     
     public func areDatesEqual(date1: Date, date2: Date) -> Bool {
-        let formatter1 = DateFormatter()
-        formatter1.dateStyle = .short
+       
         
-        return formatter1.string(from: date1) == formatter1.string(from: date2)
+        return date1.description.prefix(10) == date2.description.prefix(10)
         
 //        return Calendar.current.isDate(date1, equalTo: date2, toGranularity: .day)
     }
