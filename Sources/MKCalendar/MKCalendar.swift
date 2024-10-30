@@ -118,9 +118,7 @@ public struct MKCalendar: View {
                                                 
                                                 Spacer()
                                                 
-                                                /*if datesWithEvents != nil && (datesWithEvents?.filter { areDatesEqual(date1: $0, date2: day)*/
-                                                if datesWithEvents != nil && (datesWithEvents?.filter { Calendar.current.isDate($0, equalTo: day, toGranularity: .day)
-                                            }.count)! > 0 {
+                                                if datesWithEvents != nil && (datesWithEvents?.filter { areDatesEqual(date1: $0, date2: day) }.count)! > 0 {
                                                     Image(systemName: "circle.fill")
                                                         .resizable()
                                                         .foregroundColor(.secondary)
@@ -323,7 +321,12 @@ public struct MKCalendar: View {
     }
     
     public func areDatesEqual(date1: Date, date2: Date) -> Bool {
-        return Calendar.current.isDate(date1, equalTo: date2, toGranularity: .day)
+        let formatter1 = DateFormatter()
+        formatter1.dateStyle = .short
+        
+        return formatter1.string(from: date1) == formatter1.string(from: date2)
+        
+//        return Calendar.current.isDate(date1, equalTo: date2, toGranularity: .day)
     }
     
     public func goToLastMonth(){
